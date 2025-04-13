@@ -1,1 +1,12 @@
 @import url("./assets/normalize.css");
+
+:root {
+    --border-radius: clamp(12px,1.5vw,20px);
+    --bg-color: #100B19;
+    --bg-btn-int: #030712;
+    --gradient-img: linear-gradient(to right,#dac7e4,#f8609e, #1808a8);
+    --gradient-light-img: linear-gradient(to right, #ff89a3, #cf67ff, #5a54ff);
+    --error: #ff5353;
+    --rose-color: #c658a1;
+    --violet-color:#6558c6;
+}
