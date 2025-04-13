@@ -21,17 +21,52 @@ onMounted(() => {
 
 <template>
   <header>
-    <h1>Автоформа</h1>
+    <h1 class="large-text">Автоформа</h1>
   </header>
   <main>
-    <Loading v-if="loading" />
-    <div v-else>
-      <p v-if="error">{{ error }}</p>
-      <FormGenerator v-else :schema="formSchema" v-model="formData" />
-    </div>
-
-    <button @click="() => console.log(formData.test)">отправить</button>
+    <Loading v-if="loading" class="loading" />
+    <p v-else-if="error" class="error-text">{{ error }}</p>
+    <template v-else>
+      <FormGenerator :schema="formSchema" v-model="formData" />
+      <button class="btn-send" @click="() => console.log(formData.test)">
+        отправить
+      </button>
+    </template>
   </main>
 </template>
 
-<style scoped></style>
+<style scoped>
+header {
+  width: 100vw;
+  height: fit-content;
+  text-align: center;
+}
+main {
+  width: 100vw;
+  height: fit-content;
+  text-align: center;
+  justify-content: center;
+  margin-bottom: 30vh;
+}
+
+h1 {
+  text-align: center;
+  margin: 10vh 0 5vh;
+}
+
+.loading {
+  margin: auto;
+}
+
+.btn-send {
+  margin-top: 10vh;
+}
+
+/* button {
+  margin: max(6vw - 50px, 0vh) auto 0;
+}
+
+button.error {
+  color: var(--error);
+} */
+</style>

@@ -6,8 +6,7 @@ interface FakeResponse<T = any> {
 }
 
 function getResponse<T>(res: FakeResponse<T>): Promise<T> {
-  // return res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
-  return Promise.reject("хуй");
+  return res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
 }
 
 export async function getData<T>(): Promise<T> {

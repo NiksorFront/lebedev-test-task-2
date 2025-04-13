@@ -10,3 +10,136 @@
     --rose-color: #c658a1;
     --violet-color:#6558c6;
 }
+
+
+@font-face {
+    font-family: "Proxima";
+    src: url("./assets/fonts/proximanova_regular.woff") format("woff");
+    font-weight: 400;
+    font-style: normal;
+}
+  
+@font-face {
+    font-family: "Proxima", ;
+    src: url("./assets/fonts/proximanova_bold.woff") format("woff");
+    font-weight: 700;
+    font-style: bold;
+}
+
+body, main, #__nuxt{
+    background-color: var(--bg-color);
+}
+
+button {
+    all: unset;
+    
+	padding: 10px 20px;
+	outline: none;
+
+	/* Задаём прозрачную рамку нужной толщины */
+	border: clamp(1px, 0.3vw, 2px) solid transparent;
+	border-radius: var(--border-radius);
+	box-shadow: 0 10px 15px rgba(0, 0, 0, 0.5); /* Тень */
+	transition: transform 0.3s ease-in-out;
+
+	background-image:linear-gradient(to right, #111111, #111111); /*сплошной фон*/
+    background-origin: border-box;
+	background-clip: padding-box, border-box;
+}
+
+/* При наведении и нажатии увеличиваем/уменьшаем кнопку */
+button:hover {
+
+    cursor: pointer;
+	background-image: linear-gradient(var(--bg-color), var(--bg-color)), /*сплошной фон (цвет фона), виден только в области padding*/
+		              var(--gradient-img); /*градиент, который будет виден в области рамки*/
+	transform: scale(1.04);
+}
+button:hover:disabled{
+    transform: scale(1);
+}
+
+button:active {
+	transform: scale(0.95);
+}
+
+button:disabled {
+	opacity:0.5;
+    cursor: not-allowed;
+}
+
+
+input, textarea {
+    /* Ширина, отступы и базовые стили */
+    /* width: calc(100% - clamp(21px, 2vw, 40px)); */
+    /* padding: clamp(10px, 1vw, 20px); */
+    padding: 10px 16px;
+    outline: none;
+  
+    /* Задаём прозрачную рамку нужной толщины */
+    border: clamp(1px, 0.3vw, 2px) solid transparent;
+    border-radius: var(--border-radius);
+  
+    background-image: 
+      linear-gradient(var(--bg-color), var(--bg-color)), /*сплошной фон (цвет фона), виден только в области padding*/
+      var(--gradient-img); /*градиент, который будет виден в области рамки*/
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+
+    cursor: text;
+  }
+
+a,
+p,
+h1,
+h2,
+h3,
+label,
+input, 
+select,
+button,
+.base-text {
+	font-size: clamp(20px, 1.75vw + 1.25vh, 32px);
+	cursor: default;
+	font-family: Proxima, Helvetica, Arial, sans-serif;
+	font-weight: 400;
+    color: white;
+}
+
+.large-text{
+    text-decoration: none;
+    font-size: clamp(20px, 2vw + 1.25vh, 48px);
+}
+
+.small-text{
+    text-decoration: none;
+    font-size: clamp(14px, 1.5vw + 1.5vh, 25px);
+    /* margin: 0; */
+}
+.error-text{
+    font-size: clamp(10px, 1vw + 1vh, 16px);
+    color: var(--error);
+}
+
+.border-gradient{
+    padding: 5px 20px;
+
+	color: white;
+	outline: none;
+
+	/* Задаём прозрачную рамку нужной толщины */
+	border: clamp(1px, 0.3vw, 2px) solid transparent;
+	border-radius: var(--border-radius);
+
+	background-image:
+		linear-gradient(var(--bg-color), var(--bg-color)),
+		/*сплошной фон (цвет фона), виден только в области padding*/
+			var(--gradient-img); /*градиент, который будет виден в области рамки*/
+	background-origin: border-box;
+	background-clip: padding-box, border-box;
+}
+
+
+.pointer {
+	cursor: pointer;
+}
