@@ -1,9 +1,22 @@
-<script lang="ts"></script>
+<script setup lang="ts">
+const { modelValue, label, required } = defineProps([
+  "modelValue",
+  "label",
+  "required",
+]);
+const emit = defineEmits(["update:modelValue"]);
+</script>
 
 <template>
   <label class="small-text checkbox-label">
-    <input type="checkbox" class="border-gradient styled-checkbox" />
-    Согласен с условиями
+    <input
+      type="checkbox"
+      class="border-gradient styled-checkbox"
+      :checked="modelValue"
+      :required="required"
+      @change="(e) => emit('update:modelValue', (e.target as HTMLInputElement).checked)"
+    />
+    {{ label }}
   </label>
 </template>
 

@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { onMounted, ref, reactive } from "vue";
-import type { FormSchema, FormField } from "./utils/types";
+import type { FormSchema } from "./utils/types";
 import FormGenerator from "./components/form-generator.vue";
 import Loading from "./components/loading.vue";
+import viewResults from "./components/view-results.vue";
+
 const loading = ref(true);
 const error = ref("");
 const formSchema = ref<FormSchema>({ fields: [] });
@@ -18,9 +20,10 @@ onMounted(() => {
     .finally(() => (loading.value = false));
 });
 
-const hundelSubmit = () => {
-  console.log(formData);
-};
+//будь api, я бы отправлял formData на него.
+//Ну а так просто сделал вывод ниже button
+const viewResult = ref(false);
+const hundelSubmit = () => (viewResult.value = true);
 </script>
 
 <template>
@@ -33,7 +36,7 @@ const hundelSubmit = () => {
     <template v-else>
       <FormGenerator v-model="formData" :schema="formSchema" />
       <button class="btn-send" @click="hundelSubmit">отправить</button>
-      <pre>{{ formData }}</pre>
+      <viewResults v-if="viewResult" :results="formData" />
     </template>
   </main>
 </template>

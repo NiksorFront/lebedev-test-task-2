@@ -1,12 +1,27 @@
-<script lang="ts"></script>
+<script setup lang="ts">
+const { modelValue, label, options, required } = defineProps([
+  "modelValue",
+  "label",
+  "options",
+  "required",
+]);
+const emit = defineEmits(["update:modelValue"]);
+</script>
 
 <template>
   <div class="label-and-input">
-    <label class="small-text">роль</label>
+    <label class="small-text">{{ label }}</label>
     <div class="select-wrapper">
-      <select class="small-text styled-select">
-        <option>админ</option>
-        <option>пользователь</option>
+      <select
+        class="small-text styled-select"
+        :required="required"
+        :value="modelValue"
+        @change="(e) => emit('update:modelValue', (e.target as HTMLSelectElement).value)"
+      >
+        <option disabled value="">Выберите...</option>
+        <option v-for="option in options" :key="option" :value="option">
+          {{ option }}
+        </option>
       </select>
     </div>
   </div>

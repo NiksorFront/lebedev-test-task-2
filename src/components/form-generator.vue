@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watchEffect, reactive } from "vue";
+import { watchEffect } from "vue";
 import type { FormSchema } from "../utils/types";
 import Text from "./inputs/text.vue";
 import Email from "./inputs/email.vue";
