@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import ErrorWindow from "./error-window.vue";
 const { modelValue, label, placeholder, required } = defineProps([
   "modelValue",
   "label",
@@ -55,7 +54,6 @@ function onFocus() {
   <div class="label-and-input">
     <label class="small-text">{{ label }}</label>
     <input
-      type="email"
       class="small-text"
       ref="input"
       :placeholder="placeholder"
