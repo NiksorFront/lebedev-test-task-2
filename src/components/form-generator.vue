@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { watchEffect } from "vue";
+import { watchEffect, computed } from "vue";
 import type { FormSchema } from "../utils/types";
 import Text from "./inputs/text.vue";
 import Email from "./inputs/email.vue";
@@ -16,8 +16,7 @@ watchEffect(() => {
   schema.fields.length &&
     schema.fields.forEach((field) => {
       if (!(field.model in model)) {
-        //@ts-ignore
-        model[field.model] = field.type === "checkbox" ? false : "";
+        model.value[field.model] = field.type === "checkbox" ? false : "";
       }
     });
 });
@@ -29,6 +28,16 @@ const componentMap: Record<string, any> = {
   select: Select,
   checkbox: Checkbox,
 };
+
+const isValid = () => {
+  return schema.fields.every((field) => {
+    if (!field.required) return true;
+
+    const value = model.value[field.model];
+    return field.type === "checkbox" ? value === true : value !== "";
+  });
+};
+defineExpose({ isValid });
 </script>
 
 <template>

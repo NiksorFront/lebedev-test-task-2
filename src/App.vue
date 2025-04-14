@@ -7,8 +7,10 @@ import viewResults from "./components/view-results.vue";
 
 const loading = ref(true);
 const error = ref("");
+const formRef = ref();
 const formSchema = ref<FormSchema>({ fields: [] });
 const formData = reactive({});
+const btnError = ref(false);
 
 import { getData } from "./utils/api";
 
@@ -23,7 +25,14 @@ onMounted(() => {
 //будь api, я бы отправлял formData на него.
 //Ну а так просто сделал вывод ниже button
 const viewResult = ref(false);
-const hundelSubmit = () => (viewResult.value = true);
+const hundelSubmit = () => {
+  if (formRef.value.isValid()) {
+    viewResult.value = true;
+  } else {
+    btnError.value = true;
+    setTimeout(() => (btnError.value = false), 3500);
+  }
+};
 </script>
 
 <template>
@@ -34,8 +43,14 @@ const hundelSubmit = () => (viewResult.value = true);
     <Loading v-if="loading" class="loading" />
     <p v-else-if="error" class="error-text">{{ error }}</p>
     <template v-else>
-      <FormGenerator v-model="formData" :schema="formSchema" />
-      <button class="btn-send" @click="hundelSubmit">отправить</button>
+      <FormGenerator ref="formRef" :schema="formSchema" v-model="formData" />
+      <button
+        :class="['btn-send', { error: btnError }]"
+        @click="hundelSubmit"
+        :disabled="btnError"
+      >
+        {{ btnError ? "заполните все поля" : "отправить" }}
+      </button>
       <viewResults v-if="viewResult" :results="formData" />
     </template>
   </main>
@@ -68,11 +83,7 @@ h1 {
   margin-top: 10vh;
 }
 
-/* button {
-  margin: max(6vw - 50px, 0vh) auto 0;
-}
-
-button.error {
+.error {
   color: var(--error);
-} */
+}
 </style>
